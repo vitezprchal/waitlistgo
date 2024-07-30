@@ -4,10 +4,10 @@
   "description": "",
   "main": "",
   "scripts": {
-    "watch:tw": "tailwindcss build -i ./internal/view/styles.css -o ./build/styles.css --watch",
-    "watch:templ": "chokidar \"./internal/view/*.templ\" -c \"templ generate\"",
-    "dev:run": "go run ./cmd/main.go & \"npm run watch:tw\" & \"npm run watch:templ\"",
-    "dev:watch": "concurrently \"npm run watch:tw\" \"npm run watch:templ\" \"air\"",
+    "watch:tw": "tailwindcss build -i ./website/view/styles.css -o ./build/styles.css --watch",
+    "watch:templ": "chokidar \"./website/view/*.templ\" -c \"templ generate\"",
+    "watch:ts": "webpack --mode development --watch",
+    "watch": "concurrently \"npm run watch:tw\" \"npm run watch:ts\" \"npm run watch:templ\" \"air\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,10 +17,15 @@
   "author": "Vitezslav Prchal",
   "license": "ISC",
   "dependencies": {
+    "htmx.org": "^2.0.1",
     "tailwindcss": "^3.4.7"
   },
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.4",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
   }
 }

@@ -14,7 +14,6 @@ func InitDatabase() Repository {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
 	}
-	//defer conn.Close(context.Background())
 
 	_, err = conn.Exec(context.Background(), `
 		CREATE TABLE IF NOT EXISTS subscribers (

@@ -9,7 +9,7 @@ import (
 	"github.com/vitezprchal/waitlistgo/internal/forms"
 	"github.com/vitezprchal/waitlistgo/internal/models"
 	"github.com/vitezprchal/waitlistgo/internal/renderer"
-	"github.com/vitezprchal/waitlistgo/internal/view"
+	"github.com/vitezprchal/waitlistgo/website/view"
 )
 
 func InitServer(port string) {
@@ -40,7 +40,9 @@ func InitServer(port string) {
 	}
 
 	router.StaticFile("./build/styles.css", "./build/styles.css")
-	router.Static("/assets", "./assets")
+	router.StaticFile("./build/main.js", "./build/main.js")
+
+	router.Static("/assets", "./website/assets")
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "", view.Home(home_seo))
@@ -51,6 +53,11 @@ func InitServer(port string) {
 
 		if err := c.ShouldBind(&form); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+			return
+		}
+
+		if form.Terms != "on" {
+			c.JSON(http.StatusBadRequest, gin.H{"message": "You must agree to the terms"})
 			return
 		}
 
