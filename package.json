@@ -1,0 +1,26 @@
+{
+  "name": "waitlistgo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "watch:tw": "tailwindcss build -i ./internal/view/styles.css -o ./build/styles.css --watch",
+    "watch:templ": "chokidar \"./internal/view/*.templ\" -c \"templ generate\"",
+    "dev:run": "go run ./cmd/main.go & \"npm run watch:tw\" & \"npm run watch:templ\"",
+    "dev:watch": "concurrently \"npm run watch:tw\" \"npm run watch:templ\" \"air\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/vitezprchal/waitlistgo"
+  },
+  "author": "Vitezslav Prchal",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.4.7"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^8.2.2"
+  }
+}

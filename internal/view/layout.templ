@@ -1,0 +1,30 @@
+package view
+
+import "github.com/vitezprchal/waitlistgo/internal/models"
+
+templ Layout(title string, seo *models.SEO) {
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>{ title }</title>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<meta name="description" content="A brief description of the webpage."/>
+			<meta name="keywords" content={ seo.Keywords }/>
+			<meta name="author" content={ seo.AuthorName }/>
+			<meta name="robots" content="index, follow"/>
+			<meta property="og:title" content={ title }/>
+			<meta property="og:description" content={ seo.Description }/>
+			<meta property="og:image" content={ seo.ImageURL }/>
+			<meta property="og:url" content={ seo.PageURL }/>
+			<meta name="theme-color" content="#ffffff"/>
+			<meta name="apple-mobile-web-app-capable" content="yes"/>
+			<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+			<link href="/build/styles.css" rel="stylesheet"/>
+			<script src="/assets/htmx.js"></script>
+		</head>
+		<body>
+			{ children... }
+		</body>
+	</html>
+}

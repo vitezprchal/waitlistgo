@@ -1,0 +1,32 @@
+package view
+
+import "github.com/vitezprchal/waitlistgo/internal/models"
+
+templ Home(seo *models.SEO) {
+	@Layout("Homepage", seo) {
+		<div class="flex items-center justify-center h-screen gap-5">
+			<div class="container mx-auto max-w-sm">
+				<h1 class="text-2xl font-bold text-center">Welcome</h1>
+				<form class="flex flex-col gap-5" hx-post="/submit">
+					<div class="sm:col-span-2">
+						<label for="name" class="block text-sm font-semibold leading-6 text-gray-900">Name</label>
+						<div class="mt-2.5">
+							<input type="text" name="name" id="name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+						</div>
+					</div>
+					<div class="sm:col-span-2">
+						<label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
+						<div class="mt-2.5">
+							<input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+						</div>
+					</div>
+					<div>
+						<input type="checkbox" id="terms" name="terms" required/>
+						<label class="text-sm" for="terms">I agree to the terms and conditions</label>
+					</div>
+					<button class="border border-gray-400 p-5 text-gray-900 text-sm" type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
+	}
+}

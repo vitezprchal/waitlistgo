@@ -1,0 +1,20 @@
+{
+    "tailwindCSS.includeLanguages": {
+        "templ": "html"
+    },
+    "emmet.includeLanguages": {
+        "templ": "html"
+    },
+    "cSpell.words": [
+        "GOPATH",
+        "gopls",
+        "GOROOT",
+        "hyangah",
+        "lookpath",
+        "pprof",
+        "templ"
+    ],
+    "[templ]": {
+        "editor.defaultFormatter": "a-h.templ"
+    },
+}
