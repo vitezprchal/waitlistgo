@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/vitezprchal/waitlistgo/internal/db"
 	"github.com/vitezprchal/waitlistgo/internal/forms"
+	"github.com/vitezprchal/waitlistgo/internal/handler"
 	"github.com/vitezprchal/waitlistgo/internal/models"
 	"github.com/vitezprchal/waitlistgo/internal/renderer"
 	"github.com/vitezprchal/waitlistgo/website/view"
@@ -74,6 +75,12 @@ func InitServer(port string) {
 
 		c.JSON(http.StatusOK, gin.H{"message": "Email added to the waitlist"})
 	})
+
+	// Blog handlers
+	blog_handler := handler.NewBlogHandler()
+
+	router.GET("/blog", blog_handler.GetAllBlogPosts)
+	router.GET("/blog/:blog", blog_handler.GetBlogPost)
 
 	router.Run(port)
 

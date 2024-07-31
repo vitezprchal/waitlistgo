@@ -1,0 +1,46 @@
+package view
+
+import (
+	"fmt"
+	"github.com/vitezprchal/waitlistgo/internal/models"
+)
+
+templ blog_block(title string, excerpt string, slug string) {
+	<a href={ templ.URL(slug) }>
+		<article class="bg-white shadow-md p-5 rounded-md mb-5 hover:bg-slate-100 transition-all">
+			<h2 class="text-xl font-bold text-gray-900">{ title }</h2>
+			<p class="text-gray-700">{ excerpt }</p>
+		</article>
+	</a>
+}
+
+templ BlogListPage(page int, more bool, blogs []*models.Blog) {
+	for _, blog := range blogs {
+		@blog_block(blog.SEO.Title, blog.SEO.Description, fmt.Sprintf("/blog/%s", blog.Slug))
+	}
+	if more {
+		<div hx-get={ string(templ.URL(fmt.Sprintf("/blog?page=%d", page))) } hx-trigger="intersect once" hx-swap="afterend"></div>
+	}
+}
+
+templ BlogList(seo *models.SEO) {
+	@Layout("Blogs", seo) {
+		<main>
+			<div class="container max-w-sm mx-auto">
+				<div hx-get="/blog?page=1" hx-trigger="intersect once" hx-swap="afterend"></div>
+			</div>
+		</main>
+	}
+}
+
+templ BlogDetail(blog *models.Blog) {
+	@Layout(blog.SEO.Title, blog.SEO) {
+		<main>
+			<div class="container max-w-sm mx-auto">
+				<div class="blog-container">
+					@templ.Raw(blog.Content)
+				</div>
+			</div>
+		</main>
+	}
+}
